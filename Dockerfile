@@ -7,6 +7,4 @@ ENV SECRET_KEY=$SECRET_KEY
 
 WORKDIR /app
 
-EXPOSE 8080
-
 CMD ["./server", "-config=./config.toml", "-loglevel=trace"]

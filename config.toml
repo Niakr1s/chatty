@@ -1,5 +1,3 @@
-ServerListenAddress = ":8080"
-
 CleanInactiveUsersInterval = "1m"
 InactivityTimeout          = "1m"
 
