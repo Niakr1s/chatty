@@ -1,0 +1,11 @@
+ServerListenAddress = ":8080"
+
+CleanInactiveUsersInterval = "1m"
+InactivityTimeout          = "1m"
+
+RequestTimeout  = "15s"
+ResponseTimeout = "30s"
+
+Chats = ["Main", "Music", "Tech"]
+
+LastMessagesCount = 50
