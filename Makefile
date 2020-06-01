@@ -1,20 +1,8 @@
 build: check-env \
-	server-pull \
-	client-pull \
 	clean \
 	server-build \
-	copy-config \
 	client-build \
-	docker-build
-
-server-pull:
-	if [ -d "chatty-server" ]; then (cd chatty-server && git pull); else git clone https://github.com/niakr1s/chatty-server; fi
-
-client-pull:
-	if [ -d "chatty-client" ]; \
-	then (cd chatty-client && git pull); \
-	else git clone https://github.com/niakr1s/chatty-client && (cd chatty-client && npm install); \
-	fi
+	copy-config
 
 server-build:
 	(cd chatty-server && CGO_ENABLED=0 go build  -o "../build/server" "./bin/server/main.go")
@@ -30,6 +18,12 @@ copy-config:
 
 run:
 	docker run -p 8080:8080 -it chatty
+
+deploy:
+	heroku container:push web && heroku container:release web && heroku ps:scale web=1
+
+log:
+	heroku logs --tail
 
 clean:
 	rm -rf build
