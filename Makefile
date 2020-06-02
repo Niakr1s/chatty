@@ -19,8 +19,11 @@ copy-config:
 run:
 	docker run -p 8080:8080 -it chatty
 
-deploy:
-	heroku container:push web && heroku container:release web && heroku ps:scale web=1
+deploy: check-env
+	heroku config:set SECRET_KEY=${SECRET_KEY} SENDGRID_KEY=${SENDGRID_KEY}  && \
+		heroku container:push web && \
+		heroku container:release web && \
+		heroku ps:scale web=1
 
 log:
 	heroku logs --tail
