@@ -14,7 +14,7 @@ docker-build: check-env
 	docker build --build-arg SECRET_KEY=${SECRET_KEY} -t chatty .
 
 copy-config:
-	cp config.toml build/config.toml
+	cp config.toml build/config.toml && cp -R chatty-server/migrations build/migrations
 
 run:
 	docker run -p 8080:8080 -it chatty
