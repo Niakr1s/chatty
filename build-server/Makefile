@@ -5,13 +5,13 @@ build: check-env \
 	copy-config
 
 server-build:
-	(cd chatty-server && CGO_ENABLED=0 go build  -o "../build/server" "./bin/server/main.go")
+	(cd ../chatty-server && CGO_ENABLED=0 go build  -o "../build-server/build/server" "./bin/server/main.go")
 
 client-build:
-	(cd chatty-client && npm run-script build && cp -ar build ../build/static)
+	(cd ../chatty-client && npm run-script build && cp -ar build ../build-server/build/static)
 
 docker-build: check-env
-	docker build --build-arg SECRET_KEY=${SECRET_KEY} -t chatty .
+	(cd build-server && docker build --build-arg SECRET_KEY=${SECRET_KEY} -t chatty .)
 
 copy-config:
 	cp config.toml build/config.toml 
@@ -29,7 +29,7 @@ log:
 	heroku logs --tail
 
 clean:
-	rm -rf build
+	rm -rf build-server/build
 
 check-env:
 ifndef SECRET_KEY

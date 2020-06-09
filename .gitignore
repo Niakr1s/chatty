@@ -3,3 +3,4 @@ chatty-client/*
 chatty-client
 chatty-server
 build/*
+build-server/build/*
