@@ -4,3 +4,4 @@ chatty-client
 chatty-server
 build/*
 build-server/build/*
+build-bot/build/*
